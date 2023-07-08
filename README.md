@@ -5,10 +5,10 @@
     <a href="https://pypi.org/project/nbb-api/">
         <img src="https://img.shields.io/pypi/v/BRScraper" alt="pypi" />
     </a>
-    <a href="https://pypi.org/project/nbb-api/">
+    <a href="https://pypi.org/project/BRScraper/">
         <img src="https://img.shields.io/pypi/pyversions/BRScraper" alt="python version" />
     </a>
-    <a href="https://pypi.org/project/nbb-api/">
+    <a href="https://pypi.org/project/BRScraper/">
         <img src="https://img.shields.io/pypi/l/BRScraper" alt="license" />
     </a>
 </p>
