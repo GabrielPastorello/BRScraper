@@ -2,7 +2,7 @@
 <img src="https://github.com/GabrielPastorello/BRScraper/assets/57769272/cb95ffa0-0806-4469-89bb-28ba6bc7ff00" width="150">
 </p>
 <p align="center">
-    <a href="https://pypi.org/project/nbb-api/">
+    <a href="https://pypi.org/project/BRScraper/">
         <img src="https://img.shields.io/pypi/v/BRScraper" alt="pypi" />
     </a>
     <a href="https://pypi.org/project/BRScraper/">
