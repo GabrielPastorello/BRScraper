@@ -19,9 +19,8 @@ Python package for easy access to basketball data through scraping of [Basketbal
 
 This allows users to obtain statistics, standings, and scores for various seasons and phases of the following tournaments:
 - **NBA**
-- **WNBA**
 - **G-League**
-- **International Tournaments** (national teams, EuroLeague, EuroCup and international leagues from: Spain, Australia, China, France, Greece, Israel, Italy, Turkey, Russia and ABA)
+- **International Tournaments** (Olympics, EuroLeague, EuroCup and international leagues from: Spain, Australia, China, France, Greece, Israel, Italy, Turkey, Russia and ABA)
 
 ## 🚀 Installing
 ### Via `pip`
