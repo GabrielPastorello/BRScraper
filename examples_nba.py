@@ -29,7 +29,7 @@ df = nba.get_general_info()
 print(df)
 
 # Get the 20 season leaders in points per game for regular season
-df = nba.get_season_leaders(2023, info='pts', n=20,
+df = nba.get_season_leaders(2023, info='pts', n=10,
                             playoffs=False, per_game=True)
 print(df)
 
