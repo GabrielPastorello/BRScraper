@@ -137,7 +137,7 @@ def get_general_info():
     
     return df
 
-def get_season_leaders(season, info, n=20, playoffs=False, per_game=False):
+def get_season_leaders(season, info, n=10, playoffs=False, per_game=False):
     
     values = ['pts','reb','oreb','dreb','ast','stl','blk','fg%','ft%','3pt%','2pt%','efg%','ts%','fg','fga',
                '2p','2pa','3p','3pa','fgm','ft','fta','min','tov','pf','per','ws','ows','dws','ws48','bpm',
