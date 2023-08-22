@@ -438,3 +438,62 @@ def get_awards(award):
         df = df[(df['Player'].notna())&(df['Player']!='Player')].reset_index(drop=True)
     
     return df
+
+def get_award_votings(award:str, season:int)->pd.DataFrame:
+    """
+    Get award voting data for a given award and season.
+
+    Parameters
+    ----------
+    award : str, optional
+        The award to get voting data for.
+    season : int, optional
+        The season to get voting data for.
+    
+    Returns
+    -------
+    pd.DataFrame
+        A dataframe containing the voting data for the given award and season.
+    """
+    
+    values = [
+        'mvp'
+        ,'roy'
+        ,'all_nba'
+        ,'all_defense'
+    ]
+    
+    # Check if award is valid
+    if award not in values:
+        raise ValueError(str(award)+' is not a valid value. Try one of: "'+'", "'.join(values)+'".')
+    
+    # Check if season is valid
+    if season < 1977:
+        raise ValueError(str(season)+' is not a valid season. Try a value greater or equal than 1977.')
+
+    # Build url
+    url = 'https://www.basketball-reference.com/awards/awards_'+str(season)+'.html'
+
+    # Get the index of the award
+    if award == 'mvp':
+        index = 0
+    elif award == 'roy':
+        index = 1
+    elif award == 'all_nba':
+        index = 2
+    elif award == 'all_defense':
+        index = 3
+    
+    # Read table from url
+    try:
+        df = pd.read_html(url)[index]
+    except Exception as e:
+        raise ValueError(str(season)+' is not a valid season.') from e
+    
+    # Remove multiindex level 0 where str contains Unnamed
+    df.columns  = df.columns.map(lambda x: '_'.join(x) if 'Unnamed' not in x[0] else x[1]).str.strip('_')    
+    
+    # Remove rows where Player is NaN
+    df = df[df['Player'].notna()].reset_index(drop=True)
+
+    return df
