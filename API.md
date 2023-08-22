@@ -82,6 +82,13 @@ Get all winners of a given award.
 Parameters:
   - **`award`**: Desired award (one of `'mvp'`,`'roy'`,`'dpoy'`,`'smoy'`,`'tmoy'`,`'mip'`,`'citizenship'`,`'finals_mvp'`,`'playoffs_mvp'`,`'wcf_mvp'`,`'ecf_mvp'`,`'all_star_mvp'`,`'cpoy'`,`'player_of_the_seeding_games'`,`'tsn_mvp'`,`'tsn_roy'`,`'hustle'`,`'social_justice'`,`'coy'`,`'nbca_coy'`,`'eoy'`)
 
+### `get_award_votings(award, season)`
+Get all players who received votes for a given award in a given season.
+
+Parameters:
+  - **`award`**: Desired award (one of `'mvp'`,`'roy'`,`'all_nba'`, `'all_defense'`)
+  - **`season`**: Desired season indicated by the ending year (e.g. `2023` for 2022-23 season) Only accept seasons starting from 1977.
+
 
 # G League
 
