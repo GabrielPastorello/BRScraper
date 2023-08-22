@@ -65,3 +65,7 @@ print(df)
 # Get all MVPs
 df = nba.get_awards('mvp')
 print(df)
+
+# Get MVP votings from 2023
+df = nba.get_award_votings('mvp', 2023)
+print(df)
