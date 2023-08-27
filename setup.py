@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
 
 setuptools.setup(
             name='BRScraper',
-            version='0.1.3',
+            version='1.0.1',
             description='Python module for Basketball Reference scraping and easy access to basketball data, including NBA, G League and international leagues',
             long_description=long_description,
             long_description_content_type="text/markdown",
