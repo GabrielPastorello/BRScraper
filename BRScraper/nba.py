@@ -1,6 +1,8 @@
 import pandas as pd
 import warnings
 import re
+import requests
+from bs4 import BeautifulSoup
 from datetime import date
 
 dict_teams = {'Utah Jazz':'UTA','Phoenix Suns':'PHO',
@@ -337,7 +339,40 @@ def get_player_stats(name):
                         Valid names would be "LeBron James", "lebron james" or "LEBRON JAMES" for example.''')
                          
     try:
-        df = pd.read_html(url)[0]
+        # Fetch the page content
+        response = requests.get(url)
+        if response.status_code != 200:
+            raise ValueError(
+                name
+                + " is not a valid name. Check for misspelling errors or if that player exists."
+            )
+        html = response.text
+
+        # Parse with BeautifulSoup
+        soup = BeautifulSoup(html, "html.parser")
+
+        # Find the span with id='totals_link' and data-label='Totals'
+        totals_span = soup.find(
+            "span", attrs={"id": "totals_link", "data-label": "Totals"}
+        )
+
+        if totals_span is None:
+            raise ValueError("Totals data-label not found for " + name)
+
+        # Now, find the parent div with id='div_totals'
+        parent_div = soup.find("div", id="div_totals")
+
+        if parent_div is None:
+            raise ValueError("Totals table container not found for " + name)
+
+        # Now, find the table within this div
+        table = parent_div.find("table")
+
+        if table is None:
+            raise ValueError("Totals table not found for " + name)
+
+        # Read the table into pandas DataFrame
+        df = pd.read_html(str(table))[0]
     except:
         raise ValueError(name+' is not a valid name. Check for mispelling errors or if that players exists.')
                          
