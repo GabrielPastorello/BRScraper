@@ -84,7 +84,7 @@ def get_stats(season, info='per_game', playoffs=False, rename=False):
     except:
         raise ValueError(str(season)+' is not a valid season.')
             
-    df = df[(df['Player'].notna())&(df['Player']!='Player')].drop(['Rk'], axis=1).reset_index(drop=True)
+    df = df[(df['Player'].notna())&(df['Player']!='Player')&(df['Player']!='League Average')].drop(['Rk'], axis=1).reset_index(drop=True)
 
     if rename:
         cols = ['Player','Pos','Age','Tm','G','GS']
