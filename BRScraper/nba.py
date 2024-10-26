@@ -440,7 +440,7 @@ def get_birthdays():
     month = today.month
     day = today.day
     
-    url = 'https://www.basketball-reference.com/friv/birthdays.fcgi?month='+str(day)+'&day='+str(month)
+    url = 'https://www.basketball-reference.com/friv/birthdays.fcgi?month='+str(month)+'&day='+str(day)
     
     try:
         df = pd.read_html(url)[0]
