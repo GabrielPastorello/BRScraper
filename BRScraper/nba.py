@@ -74,7 +74,7 @@ def get_stats(season, info='per_game', playoffs=False, rename=False):
             df = pd.read_html(url_stats[1])[0]
         elif info=='advanced':
             df = pd.read_html(url_stats[2])[0]
-            df = df.drop(['Unnamed: 24','Unnamed: 19'], axis=1).reset_index(drop=True)
+            #df = df.drop(['Unnamed: 24','Unnamed: 19'], axis=1).reset_index(drop=True)
         elif info=='per_36':
             df = pd.read_html(url_stats[3])[0]
         elif info=='per_100':
@@ -82,7 +82,7 @@ def get_stats(season, info='per_game', playoffs=False, rename=False):
     except:
         raise ValueError(str(season)+' is not a valid season.')
             
-    df = df[(df['Player'].notna())&(df['Player']!='Player')].drop(['Rk'], axis=1).reset_index(drop=True)
+    df = df[(df['Player'].notna())&(df['Player']!='Player')&(df['Player']!='League Average')].drop(['Rk'], axis=1).reset_index(drop=True)
 
     if rename:
         cols = ['Player','Pos','Age','Tm','G','GS']
@@ -405,7 +405,7 @@ def get_birthdays():
     month = today.month
     day = today.day
     
-    url = 'https://www.basketball-reference.com/friv/birthdays.fcgi?month='+str(day)+'&day='+str(month)
+    url = 'https://www.basketball-reference.com/friv/birthdays.fcgi?month='+str(month)+'&day='+str(day)
     
     try:
         df = pd.read_html(url)[0]
@@ -442,7 +442,6 @@ def get_awards(award):
 def get_award_votings(award:str, season:int)->pd.DataFrame:
     """
     Get award voting data for a given award and season.
-
     Parameters
     ----------
     award : str, optional
@@ -455,18 +454,18 @@ def get_award_votings(award:str, season:int)->pd.DataFrame:
     pd.DataFrame
         A dataframe containing the voting data for the given award and season.
     """
-    
+
     values = [
         'mvp'
         ,'roy'
         ,'all_nba'
         ,'all_defense'
     ]
-    
+
     # Check if award is valid
     if award not in values:
         raise ValueError(str(award)+' is not a valid value. Try one of: "'+'", "'.join(values)+'".')
-    
+
     # Check if season is valid
     if season < 1977:
         raise ValueError(str(season)+' is not a valid season. Try a value greater or equal than 1977.')
@@ -483,16 +482,16 @@ def get_award_votings(award:str, season:int)->pd.DataFrame:
         index = 2
     elif award == 'all_defense':
         index = 3
-    
+
     # Read table from url
     try:
         df = pd.read_html(url)[index]
     except Exception as e:
         raise ValueError(str(season)+' is not a valid season.') from e
-    
+
     # Remove multiindex level 0 where str contains Unnamed
     df.columns  = df.columns.map(lambda x: '_'.join(x) if 'Unnamed' not in x[0] else x[1]).str.strip('_')    
-    
+
     # Remove rows where Player is NaN
     df = df[df['Player'].notna()].reset_index(drop=True)
 
