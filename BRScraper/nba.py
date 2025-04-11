@@ -496,3 +496,16 @@ def get_award_votings(award:str, season:int)->pd.DataFrame:
     df = df[df['Player'].notna()].reset_index(drop=True)
 
     return df
+
+def get_team_ratings(season):
+
+    url = 'https://www.basketball-reference.com/leagues/NBA_'+str(season)+'_ratings.html'
+
+    try:
+        df = pd.read_html(url)[0]
+    except:
+        raise ValueError(str(season)+' is not a valid season.')
+
+    df.columns = df.columns.droplevel(0)
+
+    return df
